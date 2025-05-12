@@ -19,7 +19,16 @@
   	<url-pattern>*.me</url-pattern>
   </servlet-mapping>
   
-  
+
+	<servlet>
+  	<servlet-name>ServletController</servlet-name>
+  	<servlet-class>ServletController.BoardController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ServletController</servlet-name>
+  	<url-pattern>*.co</url-pattern>
+  </servlet-mapping>
+
   <resource-ref>
   	<description>Connection</description>
   	<res-ref-name>jdbc/MysqlDB</res-ref-name>
