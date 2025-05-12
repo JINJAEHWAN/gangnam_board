@@ -23,7 +23,7 @@
 		movePage = "/list.co";
 	}
 	
-	response.sendRedirect(movePage);// 로그
+	response.sendRedirect(movePage);// 로그인
 %>
 
 
