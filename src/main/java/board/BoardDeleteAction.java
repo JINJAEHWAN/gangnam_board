@@ -4,8 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import ServletController.Action;
-import ServletController.ActionForward;
+import servletController.Action;
+import servletController.ActionForward;
 
 
 

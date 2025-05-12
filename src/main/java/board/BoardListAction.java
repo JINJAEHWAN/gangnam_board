@@ -5,8 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ServletController.Action;
-import ServletController.ActionForward;
+import servletController.Action;
+import servletController.ActionForward;
 
 public class BoardListAction implements Action {
 
