@@ -43,6 +43,8 @@ public class MemberDAO {
 		}
 	}
 
+	
+	
 	public MemberVO login(String name) {
 		
 		MemberVO memberVO = null;
