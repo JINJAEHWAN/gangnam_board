@@ -11,13 +11,19 @@
 <body>
 <%
 
-String name = request.getParameter("userId");
-String pw = request.getParameter("password");
-
-MemberDAO memDAO  = new MemberDAO();
-MemberVO memVO = new MemberVO();
-
-
+	String name = request.getParameter("userId");
+	String pw = request.getParameter("password");
+	
+	MemberDAO memDAO  = new MemberDAO();
+	MemberVO memVO = memDAO.login(name);
+	
+	String movePage = "/login.me";
+	//만약에 가져온게 달라, 그러면 login.me 로 보내고, 같으면 list.co 로 보내
+	if(memVO != null && memVO.getPassword().equals(pw)){
+		movePage = "/list.co";
+	}
+	
+	response.sendRedirect(movePage);// 로그
 %>
 
 
