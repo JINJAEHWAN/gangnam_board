@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import member.loginProcessAction;
 
 
-
 /**
  * Servlet implementation class Member
  */
@@ -63,17 +62,14 @@ public class MemberController extends HttpServlet {
 		}
 		
 		
-		
 		try {
-			if(action != null) {
+			if ( action != null ) {
 				forward = action.execute(request, response);
 			}
-			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 
 		if(forward.isRedirect()) {
 			response.sendRedirect(forward.getPath());

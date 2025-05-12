@@ -56,9 +56,6 @@ public class BoardController extends HttpServlet {
 		Action action = null;
 		ActionForward forward = null;
 		
-		
-		//나중에 페이지 이동 조건문 작성 필요
-		
 		if(command.equals("/deleteAction.co")) {
 			action = new BoardDeleteAction();
 		} else if (command.equals("/write.co")) {
@@ -76,7 +73,6 @@ public class BoardController extends HttpServlet {
 		} else if (command.equals("/like.co")) {
 			action = new BoardLikeAction();
 		}
-		
 		
 		try {
 			if(action != null) {
