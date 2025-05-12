@@ -396,8 +396,8 @@
                 String userId = (String) session.getAttribute("userId");
                 if (userId != null && userId.equals(boardVO.getInstUser())) {
             %>
-                <input type="button" class="updateBtn btn" value="수정하기" onclick="boardUpdate()">
-                <input type="button" class="deleteBtn btn" value="삭제하기" onclick="boardDelete()">
+                <input type="button" id = "hidden_button" class="updateBtn btn" value="수정하기" onclick="boardUpdate()">
+                <input type="button" id = "hidden_button" class="deleteBtn btn" value="삭제하기" onclick="boardDelete()">
             <% } %>
         </div>
     </div>
