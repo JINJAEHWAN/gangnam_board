@@ -22,7 +22,7 @@ public class BoardDetailAction implements Action {
 		int boardIdx = Integer.parseInt(idx);
 		
 		vo = dao.boardDetail(boardIdx);
-
+		dao.boardViewCount(boardIdx);
 		
 		request.setAttribute("vo", vo);
 		

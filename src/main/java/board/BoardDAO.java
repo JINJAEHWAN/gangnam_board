@@ -36,7 +36,6 @@ public class BoardDAO {
 		try { if(conn != null) conn.close(); } catch(Exception e) {}
 	}
 	
-	
 	//BoardWriteAction
 	public int boardInsert(BoardVO vo) {
 		int result = 0;
@@ -60,7 +59,22 @@ public class BoardDAO {
 		}
 		return result;
 	}
-
+	
+	public int boardDelete(int boardIdx) {
+		int result = 0;
+		String sql = "UPDATE TRAVEL_BOARD SET DEL_YN = 'Y' WHERE BOARD_IDX = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardIdx);
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeCon();
+		}
+		return result;
+	}
 	
 	public BoardVO boardDetail(int boardIdx) {		
 		BoardVO vo = new BoardVO();
@@ -97,19 +111,22 @@ public class BoardDAO {
 		return vo;
 	}
 	
-	public int boardDelete(int boardIdx) {
+	public int boardViewCount(int boardIdx) {
 		int result = 0;
-		String sql = "UPDATE TRAVEL_BOARD SET DEL_YN = 'Y' WHERE BOARD_IDX = ?";
+		String sql = "UPDATE TRAVEL_BOARD SET VIEW_COUNT = VIEW_COUNT + 1 WHERE BOARD_IDX = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardIdx);
 			result = pstmt.executeUpdate();
-		} catch(Exception e) {
+		}
+		catch (Exception e) {
 			e.printStackTrace();
-		} finally {
+		}
+		finally {
 			closeCon();
 		}
+		
 		return result;
 	}
 
