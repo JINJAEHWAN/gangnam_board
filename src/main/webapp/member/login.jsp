@@ -105,7 +105,7 @@
 <body>
     <div class="container">
         <h1>로그인</h1>
-        <form action="loginProcess.jsp" method="post">
+        <form action="${pageContext.request.contextPath}/loginProcess.me" method="post">
             <div class="form-group">
                 <label for="userId">아이디</label>
                 <input type="text" id="userId" name="userId" required>
