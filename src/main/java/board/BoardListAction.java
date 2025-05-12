@@ -1,4 +1,4 @@
-package Board;
+package board;
 
 import java.util.List;
 
@@ -23,19 +23,19 @@ public class BoardListAction implements Action {
 		String keyword = request.getParameter("kewword");
 		String category = request.getParameter("category");
 		
-		if (keyword != null && !keyword.trim().isEmpty() && category != null && !category.trim().isEmpty()) {
-			list = dao.searchByKeywordAndCategory(keyword, category);
-		}
-		else if (keyword != null && !keyword.trim().isEmpty()) {
-			list = dao.searchByKeyword(keyword);
-		}
-		else if (category != null && !category.trim().isEmpty()) {
-			list = dao.searchByCategory(category);
-		}
-		else {
-			list = dao.boardList();
-		}
-		
+//		if (keyword != null && !keyword.trim().isEmpty() && category != null && !category.trim().isEmpty()) {
+//			list = dao.searchByKeywordAndCategory(keyword, category);
+//		}
+//		else if (keyword != null && !keyword.trim().isEmpty()) {
+//			list = dao.searchByKeyword(keyword);
+//		}
+//		else if (category != null && !category.trim().isEmpty()) {
+//			list = dao.searchByCategory(category);
+//		}
+//		else {
+//			list = dao.boardList();
+//		}
+//		
 		request.setAttribute("list", list);
 		
 		ActionForward forward = new ActionForward();
