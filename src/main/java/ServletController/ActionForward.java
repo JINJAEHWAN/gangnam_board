@@ -1,4 +1,4 @@
-package ServletController;
+package servletController;
 
 public class ActionForward {
 
