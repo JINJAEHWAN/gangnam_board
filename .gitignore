@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/eclipse,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse,java
 
+# DB 연결 정보
+src/main/webapp/META-INF/context.xml
+
 ### Eclipse ###
 .metadata
 bin/
