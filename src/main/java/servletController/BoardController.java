@@ -15,6 +15,7 @@ import board.BoardLikeAction;
 import board.BoardListAction;
 import board.BoardUpdateAction;
 import board.BoardUpdateResultAction;
+import board.BoardWriteAction;
 
 
 /**
@@ -35,6 +36,12 @@ public class BoardController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		process(request, response);
+	}
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		process(request, response);
@@ -60,9 +67,13 @@ public class BoardController extends HttpServlet {
 			action = new BoardDeleteAction();
 		} else if (command.equals("/write.co")) {
 			forward = new ActionForward();
-			forward.setPath("boardWrite.jsp");
+			forward.setPath("board/boardWrite.jsp");
 			forward.setRedirect(true);
-		} else if (command.equals("/update.co")) {
+		} 
+		else if (command.equals("/writeAction.co")) {
+			action = new BoardWriteAction();
+		}
+		else if (command.equals("/update.co")) {
 			action = new BoardUpdateAction();
 		} else if (command.equals("/updateAction.co")) {
 			action = new BoardUpdateResultAction();
