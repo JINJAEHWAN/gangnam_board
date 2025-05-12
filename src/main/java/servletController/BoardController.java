@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board.BoardDeleteAction;
+import board.BoardListAction;
 
 /**
  * Servlet implementation class BoardController
@@ -55,7 +56,9 @@ public class BoardController extends HttpServlet {
 		if(command.equals("/deleteAction.co")) {
 			action = new BoardDeleteAction();
 		}
-		//이후 else if 로 바꿔주세요. 그때 이 주석도 지워주세요.
+		else if (command.equals("/list.co")) {
+			action = new BoardListAction();
+		}
 		
 		
 		try {
