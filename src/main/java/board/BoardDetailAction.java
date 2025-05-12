@@ -1,7 +1,5 @@
 package board;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,11 +16,19 @@ public class BoardDetailAction implements Action {
 		response.setCharacterEncoding("UTF-8");	
 		
 		BoardDAO dao = new BoardDAO();
-		List<BoardVO> list = null;
+		BoardVO vo = new BoardVO();
 		
+		String idx = request.getParameter("board_idx");
+		int boardIdx = Integer.parseInt(idx);
 		
+		vo = dao.boardDetail(boardIdx);
+		dao.boardViewCount(boardIdx);
 		
+		request.setAttribute("vo", vo);
 		
+		ActionForward forward = new ActionForward();
+		forward.setRedirect(false);
+		forward.setPath("/boardDetail.jsp");
 		
 		return null;
 		
