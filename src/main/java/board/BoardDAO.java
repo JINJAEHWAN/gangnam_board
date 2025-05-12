@@ -106,7 +106,7 @@ public class BoardDAO {
 			e.printStackTrace();
 		} 
 		finally {
-			closeCon();
+//			closeCon();
 		}
 		return vo;
 	}

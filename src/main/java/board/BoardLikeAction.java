@@ -32,8 +32,12 @@ public class BoardLikeAction implements Action {
 	     int boardIdx = Integer.parseInt(request.getParameter("board_idx"));
 	     
 	     // 좋아요 처리
-	     BoardDAO dao = new BoardDAO();
-	     int result = dao.boardLikeCount(boardIdx);
+	     BoardVO boardVO = (BoardVO) request.getAttribute("boardVO");
+         if (userId != null && !userId.equals(boardVO.getInstUser())) {
+        	 BoardDAO dao = new BoardDAO();
+        	 int result = dao.boardLikeCount(boardIdx);        	 
+         }
+	     
 	     
 	     // 상세 페이지로 리다이렉트
 	     ActionForward forward = new ActionForward();
