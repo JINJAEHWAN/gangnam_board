@@ -285,4 +285,21 @@ public class BoardDAO {
 		}
 		return list;
 	}
+	
+	// BoardLikeAction
+	public int boardLikeCount(int boardIdx) {
+		int result = 0;
+		String sql = "UPDATE TRAVEL_BOARD SET LIKE_COUNT = LIKE_COUNT + 1 WHERE BOARD_IDX = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardIdx);
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeCon();
+		}
+		return result;
+	}
 }
