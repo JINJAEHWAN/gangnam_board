@@ -1,6 +1,8 @@
 package ServletController;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,6 +44,30 @@ public class BoardController extends HttpServlet {
 		String path = request.getContextPath();
 		String command = url.substring(path.length());
 		System.out.println("command: "+command);
+		
+		Action action = null;
+		ActionForward forward = null;
+		
+		
+		//나중에 페이지 이동 조건문 작성 필요
+		
+		
+		try {
+			if(action != null) {
+				forward = action.execute(request, response);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(forward.isRedirect()) {
+			response.sendRedirect(forward.getPath());
+		}
+		else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
+			dispatcher.forward(request, response);
+		}
 	}
 
 }
