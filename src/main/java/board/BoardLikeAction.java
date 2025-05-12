@@ -38,7 +38,6 @@ public class BoardLikeAction implements Action {
         	 int result = dao.boardLikeCount(boardIdx);        	 
          }
 	     
-	     
 	     // 상세 페이지로 리다이렉트
 	     ActionForward forward = new ActionForward();
 	     forward.setRedirect(true);
