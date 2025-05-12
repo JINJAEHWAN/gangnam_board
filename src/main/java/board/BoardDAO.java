@@ -109,4 +109,28 @@ public class BoardDAO {
 		}
 		return result;
 	}
+	
+	//BoardUpdateResultAction
+	public int boardUpdate(BoardVO vo) {
+		int result = 0;
+		String sql = "UPDATE TRAVEL_BOARD SET BOARD_TITLE = ?, BOARD_CONTENT = ?, BOARD_CATEGORY = ?, TRAVEL_LOCATION = ?, TRAVEL_PERIOD = ?, TRAVEL_BUDGET = ?, UPDT_USER = ?, UPDT_DATE = NOW() WHERE BOARD_IDX = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getBoardTitle());
+			pstmt.setString(2, vo.getBoardContent());
+			pstmt.setString(3, vo.getBoardCategory());
+			pstmt.setString(4, vo.getTravelLocation());
+			pstmt.setString(5, vo.getTravelPeriod());
+			pstmt.setInt(6, vo.getTravelBudget());
+			pstmt.setString(7, vo.getUpdtUser());
+			pstmt.setInt(8, vo.getBoardIdx());
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeCon();
+		}
+		return result;
+	}
 }
