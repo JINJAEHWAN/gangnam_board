@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board.BoardDeleteAction;
+import board.BoardDetailAction;
+import board.BoardListAction;
 import board.BoardUpdateAction;
 import board.BoardUpdateResultAction;
 
@@ -65,6 +67,12 @@ public class BoardController extends HttpServlet {
 			action = new BoardUpdateAction();
 		} else if (command.equals("/updateAction.co")) {
 			action = new BoardUpdateResultAction();
+		}
+		else if (command.equals("/list.co")) {
+			action = new BoardListAction();
+		}
+		else if (command.equals("/detail.co")) {
+			action = new BoardDetailAction();
 		}
 		
 		
