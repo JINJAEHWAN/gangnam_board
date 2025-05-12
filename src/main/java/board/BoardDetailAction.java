@@ -24,11 +24,13 @@ public class BoardDetailAction implements Action {
 		vo = dao.boardDetail(boardIdx);
 		dao.boardViewCount(boardIdx);
 		
+		dao.closeCon();
+		
 		request.setAttribute("vo", vo);
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("/boardDetail.jsp");
+		forward.setPath("board/boardDetail.jsp");
 		
 		return null;
 		
