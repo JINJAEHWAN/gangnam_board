@@ -1,28 +1,26 @@
 package ServletController;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.BoardListAction;
-import controller.Action;
-import controller.ActionForward;
-import controller.String;
+
 
 /**
  * Servlet implementation class Member
  */
-@WebServlet("/Member")
-public class Member extends HttpServlet {
+public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Member() {
+    public MemberController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -59,6 +57,25 @@ public class Member extends HttpServlet {
 			forward.setPath("login.jsp");
 			forward.setRedirect(false);
 		}
+		
+		try {
+			if(action != null) {
+				forward = action.execute(request, response);
+			}
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+
+		if(forward.isRedirect()) {
+			response.sendRedirect(forward.getPath());
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
+			dispatcher.forward(request, response);
+		}
+		
 	}
 
 }
