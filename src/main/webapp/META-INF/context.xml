@@ -5,7 +5,9 @@
 	driverClassName="com.mysql.jdbc.Driver"
 	url="jdbc:mysql://localhost:3306/mydb?serverTimezone=UTC"
 	username="root"
-	password="0306"
+
+	password="1234"
+
 	maxActive="20"
 	maxIdle="10"
 	maxWait="-1" />

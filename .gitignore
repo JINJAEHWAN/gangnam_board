@@ -4,6 +4,14 @@
 # DB 연결 정보
 src/main/webapp/META-INF/context.xml
 
+# .gitignore에 추가 context.xml 이 서로에게 저장됨.
+context.xml
+
+#이상한 파일
+.DS_Store
+src/.DS_Store
+src/main/.DS_Store
+src/main/webapp/.DS_Store
 ### Eclipse ###
 .metadata
 bin/
