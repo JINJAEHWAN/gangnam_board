@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-
 /**
  * Servlet implementation class Member
  */
@@ -30,7 +29,7 @@ public class MemberController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		process(request, response);
 	}
 
 	/**
@@ -38,7 +37,7 @@ public class MemberController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		process(request, response);
 	}
 	public void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		request.setCharacterEncoding("UTF-8");
@@ -54,26 +53,21 @@ public class MemberController extends HttpServlet {
 		
 		if(command.equals("/login.me")) {
 			forward = new ActionForward();
-			forward.setPath("login.jsp");
-			forward.setRedirect(false);
+			forward.setPath("member/login.jsp");
 		}
 		else if(command.equals("/register.me")) {
 			forward = new ActionForward();
-			forward.setPath("register.jsp");
-			forward.setRedirect(false);
-		}
-		
+			forward.setPath("member/register.jsp");
+		}		
 		
 		try {
-			if(action != null) {
-				forward = action.execute(request, response);
+			if ( action != null ) {
+				// login, register 만들고 수정
 			}
-			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 
 		if(forward.isRedirect()) {
 			response.sendRedirect(forward.getPath());
