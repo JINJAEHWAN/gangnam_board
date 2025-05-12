@@ -62,8 +62,8 @@ public class BoardDAO {
 	}
 
 	
-	public BoardVO boardDetail(int boardIdx) {
-		List<BoardVO> list = new ArrayList<>();
+	public BoardVO boardDetail(int boardIdx) {		
+		BoardVO vo = new BoardVO();
 		String sql = "SELECT * FROM TRAVEL_BOARD WHERE BOARD_IDX = ? AND DEL_YN = 'N'";
 		
 		try {
@@ -72,7 +72,6 @@ public class BoardDAO {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				BoardVO vo = new BoardVO();
 				vo.setBoardIdx(rs.getInt("BOARD_IDX"));
 				vo.setBoardTitle(rs.getString("BOARD_TITLE"));
 				vo.setBoardContent(rs.getString("BOARD_CONTENT"));
@@ -87,14 +86,15 @@ public class BoardDAO {
 				vo.setUpdtUser(rs.getString("UPDT_USER"));
 				vo.setUpdtDate(rs.getString("UPDT_DATE"));
 				vo.setDelYn(rs.getString("DEL_YN"));
-				list.add(vo);
 			}
-		} catch(Exception e) {
+		} 
+		catch(Exception e) {
 			e.printStackTrace();
-		} finally {
+		} 
+		finally {
 			closeCon();
 		}
-		return null;
+		return vo;
 	}
 	
 	public int boardDelete(int boardIdx) {
