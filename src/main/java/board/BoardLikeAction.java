@@ -35,7 +35,7 @@ public class BoardLikeAction implements Action {
 	     BoardVO boardVO = (BoardVO) request.getAttribute("boardVO");
          if (userId != null && !userId.equals(boardVO.getInstUser())) {
         	 BoardDAO dao = new BoardDAO();
-        	 int result = dao.boardLikeCount(boardIdx);        	 
+        	 dao.boardLikeCount(boardIdx);     	 
          }
 	     
 	     // 상세 페이지로 리다이렉트
