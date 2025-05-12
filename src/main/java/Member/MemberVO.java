@@ -1,4 +1,4 @@
-package member;
+package Member;
 
 public class MemberVO {
 
