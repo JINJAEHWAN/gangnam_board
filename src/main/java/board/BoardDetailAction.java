@@ -16,23 +16,23 @@ public class BoardDetailAction implements Action {
 		response.setCharacterEncoding("UTF-8");	
 		
 		BoardDAO dao = new BoardDAO();
-		BoardVO vo = new BoardVO();
+		BoardVO boardVO = new BoardVO();
 		
 		String idx = request.getParameter("board_idx");
 		int boardIdx = Integer.parseInt(idx);
 		
-		vo = dao.boardDetail(boardIdx);
 		dao.boardViewCount(boardIdx);
+		boardVO = dao.boardDetail(boardIdx);
 		
 		dao.closeCon();
 		
-		request.setAttribute("vo", vo);
+		request.setAttribute("boardVO", boardVO);
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		forward.setPath("board/boardDetail.jsp");
 		
-		return null;
+		return forward;
 		
 	}
 
