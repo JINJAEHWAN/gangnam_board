@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import member.loginProcessAction;
+
 
 
 /**
@@ -25,21 +27,15 @@ public class MemberController extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		process(request, response);
 	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		process(request, response);
+	}
+	
 	public void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -54,13 +50,16 @@ public class MemberController extends HttpServlet {
 		
 		if(command.equals("/login.me")) {
 			forward = new ActionForward();
-			forward.setPath("/member/login.jsp");
+			forward.setPath("member/login.jsp");
 			forward.setRedirect(false);
 		}
 		else if(command.equals("/register.me")) {
 			forward = new ActionForward();
-			forward.setPath("/member/register.jsp");
+			forward.setPath("member/register.jsp");
 			forward.setRedirect(false);
+		}
+		else if(command.equals("/loginProcess.me")) {
+			action = new loginProcessAction();
 		}
 		
 		

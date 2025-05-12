@@ -15,10 +15,16 @@ public class loginProcessAction implements Action {
 		MemberDAO memDAO  = new MemberDAO();
 		MemberVO memVO1 =new MemberVO();
 		memVO1.setUserId(request.getParameter("userId"));
-		memVO1.setPassword("password");
+		memVO1.setPassword(request.getParameter("password"));
 		MemberVO memVO2 = memDAO.login(memVO1.getUserId());
+		System.out.println("dag");
+		forward.setPath("login.me");
 		
-		
+		if(memVO2!=null) {
+			forward.setPath("list.co");
+			forward.setRedirect(true);
+			System.out.println("로그인 o");
+		}
 		
 		return forward;
 	}
