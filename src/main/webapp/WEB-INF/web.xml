@@ -11,6 +11,16 @@
   </welcome-file-list>
   
   <servlet>
+  	<servlet-name>Member</servlet-name>
+  	<servlet-class>ServletController.Member</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Member</servlet-name>
+  	<url-pattern>*.me</url-pattern>
+  </servlet-mapping>
+  
+
+	<servlet>
   	<servlet-name>ServletController</servlet-name>
   	<servlet-class>ServletController.BoardController</servlet-class>
   </servlet>
@@ -18,7 +28,7 @@
   	<servlet-name>ServletController</servlet-name>
   	<url-pattern>*.co</url-pattern>
   </servlet-mapping>
-  
+
   <resource-ref>
   	<description>Connection</description>
   	<res-ref-name>jdbc/MysqlDB</res-ref-name>
