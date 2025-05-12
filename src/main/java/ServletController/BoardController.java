@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Board.BoardDeleteAction;
+
 /**
  * Servlet implementation class BoardController
  */
@@ -50,6 +52,10 @@ public class BoardController extends HttpServlet {
 		
 		
 		//나중에 페이지 이동 조건문 작성 필요
+		if(command.equals("/deleteAction.co")) {
+			action = new Board.BoardDeleteAction();
+		}
+		//이후 else if 로 바꿔주세요. 그때 이 주석도 지워주세요.
 		
 		
 		try {
