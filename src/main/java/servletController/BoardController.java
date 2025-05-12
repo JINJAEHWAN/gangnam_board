@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board.BoardDeleteAction;
+import board.BoardUpdateAction;
+import board.BoardUpdateResultAction;
 
 /**
  * Servlet implementation class BoardController
@@ -55,8 +57,15 @@ public class BoardController extends HttpServlet {
 		
 		if(command.equals("/deleteAction.co")) {
 			action = new BoardDeleteAction();
+		} else if (command.equals("/write.co")) {
+			forward = new ActionForward();
+			forward.setPath("boardWrite.jsp");
+			forward.setRedirect(true);
+		} else if (command.equals("/update.co")) {
+			action = new BoardUpdateAction();
+		} else if (command.equals("/updateAction.co")) {
+			action = new BoardUpdateResultAction();
 		}
-		//이후 else if 로 바꿔주세요. 그때 이 주석도 지워주세요.
 		
 		
 		try {
