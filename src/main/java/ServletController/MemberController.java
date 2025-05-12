@@ -57,6 +57,12 @@ public class MemberController extends HttpServlet {
 			forward.setPath("login.jsp");
 			forward.setRedirect(false);
 		}
+		else if(command.equals("/register.me")) {
+			forward = new ActionForward();
+			forward.setPath("register.jsp");
+			forward.setRedirect(false);
+		}
+		
 		
 		try {
 			if(action != null) {
