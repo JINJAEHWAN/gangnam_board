@@ -20,9 +20,16 @@ public class BoardDetailAction implements Action {
 		BoardDAO dao = new BoardDAO();
 		List<BoardVO> list = null;
 		
+		String idx = request.getParameter("board_idx");
+		int boardIdx = Integer.parseInt(idx);
 		
+//		list = dao.boardDetail(boardIdx);
 		
+		request.setAttribute("list", list);
 		
+		ActionForward forward = new ActionForward();
+		forward.setRedirect(false);
+		forward.setPath("/boardDetail.jsp");
 		
 		return null;
 		
