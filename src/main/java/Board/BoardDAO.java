@@ -25,6 +25,10 @@ public class BoardDAO {
 		}
 	}
 	
+	
+	
+	
+	
 	public void closeCon() {
 		try { if(rs != null) rs.close(); } catch(Exception e) {}
 		try { if(pstmt != null) pstmt.close(); } catch(Exception e) {}
