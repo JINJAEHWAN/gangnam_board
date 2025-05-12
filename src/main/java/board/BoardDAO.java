@@ -67,6 +67,20 @@ public class BoardDAO {
 	
 	public List<BoardVO> searchByKeyword(String keyword) {
 		List<BoardVO> list = new ArrayList<>();
+		String sql = "SELECT * FROM TRAVEL_BOARD WHERE DEL_YN = N AND (BOARD_TITLE LIKE ? OR BOARD_CONTENT LIKE ?) ORDER BY BOARD_IDX DESC";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + keyword + "%");
+			pstmt.setString(2, "%" + keyword + "%");
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			closeCon();
+		}
 		
 		return list;
 	}
