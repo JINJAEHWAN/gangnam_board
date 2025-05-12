@@ -12,7 +12,7 @@
   
   <servlet>
   	<servlet-name>Member</servlet-name>
-  	<servlet-class>ServletController.Member</servlet-class>
+  	<servlet-class>ServletController.MemberController</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>Member</servlet-name>
