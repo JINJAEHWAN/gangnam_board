@@ -321,7 +321,7 @@
     <div class="content">
         <span class="mainTitle">여행 이야기 작성</span>
 
-        <form action="writeAction.co" method="post">
+        <form action="${pageContext.request.contextPath}/writeAction.co" method="post">
             <div class="title">
                 <span class="subTitle">제목: </span>
                 <input type="text" name="boardTitle">

@@ -10,15 +10,14 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-
 import board.BoardVO;
 
 public class BoardDAO {
-	
+
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
-	
+
 	public BoardDAO() {
 		try {
 			Context init = new InitialContext();
@@ -29,18 +28,30 @@ public class BoardDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void closeCon() {
-		try { if(rs != null) rs.close(); } catch(Exception e) {}
-		try { if(pstmt != null) pstmt.close(); } catch(Exception e) {}
-		try { if(conn != null) conn.close(); } catch(Exception e) {}
+		try {
+			if (rs != null)
+				rs.close();
+		} catch (Exception e) {
+		}
+		try {
+			if (pstmt != null)
+				pstmt.close();
+		} catch (Exception e) {
+		}
+		try {
+			if (conn != null)
+				conn.close();
+		} catch (Exception e) {
+		}
 	}
-	
-	//BoardWriteAction
+
+	// BoardWriteAction
 	public int boardInsert(BoardVO vo) {
 		int result = 0;
 		String sql = "INSERT INTO TRAVEL_BOARD (BOARD_TITLE, BOARD_CONTENT, BOARD_CATEGORY, TRAVEL_LOCATION, TRAVEL_PERIOD, TRAVEL_BUDGET, INST_USER, UPDT_USER) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getBoardTitle());
@@ -52,40 +63,41 @@ public class BoardDAO {
 			pstmt.setString(7, vo.getInstUser());
 			pstmt.setString(8, vo.getInstUser());
 			result = pstmt.executeUpdate();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			closeCon();
 		}
 		return result;
 	}
-	
+
 	public int boardDelete(int boardIdx) {
 		int result = 0;
 		String sql = "UPDATE TRAVEL_BOARD SET DEL_YN = 'Y' WHERE BOARD_IDX = ?";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardIdx);
 			result = pstmt.executeUpdate();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			closeCon();
 		}
 		return result;
 	}
-	
-	public BoardVO boardDetail(int boardIdx) {		
+
+	// 상세보기 불러오는 용도
+	public BoardVO boardDetail(int boardIdx) {
 		BoardVO vo = new BoardVO();
 		String sql = "SELECT * FROM TRAVEL_BOARD WHERE BOARD_IDX = ? AND DEL_YN = 'N'";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardIdx);
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				vo.setBoardIdx(rs.getInt("BOARD_IDX"));
 				vo.setBoardTitle(rs.getString("BOARD_TITLE"));
 				vo.setBoardContent(rs.getString("BOARD_CONTENT"));
@@ -101,41 +113,36 @@ public class BoardDAO {
 				vo.setUpdtDate(rs.getString("UPDT_DATE"));
 				vo.setDelYn(rs.getString("DEL_YN"));
 			}
-		} 
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} 
-		finally {
+		} finally {
 //			closeCon();
 		}
 		return vo;
 	}
-	
+
 	public int boardViewCount(int boardIdx) {
 		int result = 0;
 		String sql = "UPDATE TRAVEL_BOARD SET VIEW_COUNT = VIEW_COUNT + 1 WHERE BOARD_IDX = ?";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardIdx);
 			result = pstmt.executeUpdate();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 //			closeCon();
 		}
-		
+
 		return result;
 	}
 
-	
-	//BoardUpdateResultAction
+	// BoardUpdateResultAction
 	public int boardUpdate(BoardVO vo) {
 		int result = 0;
 		String sql = "UPDATE TRAVEL_BOARD SET BOARD_TITLE = ?, BOARD_CONTENT = ?, BOARD_CATEGORY = ?, TRAVEL_LOCATION = ?, TRAVEL_PERIOD = ?, TRAVEL_BUDGET = ?, UPDT_USER = ?, UPDT_DATE = NOW() WHERE BOARD_IDX = ?";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getBoardTitle());
@@ -147,22 +154,23 @@ public class BoardDAO {
 			pstmt.setString(7, vo.getUpdtUser());
 			pstmt.setInt(8, vo.getBoardIdx());
 			result = pstmt.executeUpdate();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			closeCon();
 		}
 		return result;
 	}
+
 	public List<BoardVO> boardList() {
 		List<BoardVO> list = new ArrayList<>();
 		String sql = "SELECT * FROM TRAVEL_BOARD WHERE DEL_YN = 'N' ORDER BY BOARD_IDX DESC";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				BoardVO vo = new BoardVO();
 				vo.setBoardIdx(rs.getInt("BOARD_IDX"));
 				vo.setBoardTitle(rs.getString("BOARD_TITLE"));
@@ -180,27 +188,25 @@ public class BoardDAO {
 				vo.setDelYn(rs.getString("DEL_YN"));
 				list.add(vo);
 			}
-		} 
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} 
-		finally {
+		} finally {
 			closeCon();
 		}
 		return list;
 	}
-	
+
 	public List<BoardVO> searchByKeyword(String keyword) {
 		List<BoardVO> list = new ArrayList<>();
 		String sql = "SELECT * FROM TRAVEL_BOARD WHERE DEL_YN = 'N' AND (BOARD_TITLE LIKE ? OR BOARD_CONTENT LIKE ?) ORDER BY BOARD_IDX DESC";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + keyword + "%");
 			pstmt.setString(2, "%" + keyword + "%");
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				BoardVO vo = new BoardVO();
 				vo.setBoardIdx(rs.getInt("BOARD_IDX"));
 				vo.setBoardTitle(rs.getString("BOARD_TITLE"));
@@ -218,26 +224,24 @@ public class BoardDAO {
 				vo.setDelYn(rs.getString("DEL_YN"));
 				list.add(vo);
 			}
-		} 
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} 
-		finally {
+		} finally {
 			closeCon();
 		}
 		return list;
 	}
-	
+
 	public List<BoardVO> searchByCategory(String category) {
 		List<BoardVO> list = new ArrayList<>();
 		String sql = "SELECT * FROM TRAVEL_BOARD WHERE DEL_YN = 'N' AND BOARD_CATEGORY = ? ORDER BY BOARD_IDX DESC";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, category);
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				BoardVO vo = new BoardVO();
 				vo.setBoardIdx(rs.getInt("BOARD_IDX"));
 				vo.setBoardTitle(rs.getString("BOARD_TITLE"));
@@ -255,11 +259,9 @@ public class BoardDAO {
 				vo.setDelYn(rs.getString("DEL_YN"));
 				list.add(vo);
 			}
-		} 
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} 
-		finally {
+		} finally {
 			closeCon();
 		}
 		return list;
@@ -268,15 +270,15 @@ public class BoardDAO {
 	public List<BoardVO> searchByKeywordAndCategory(String keyword, String category) {
 		List<BoardVO> list = new ArrayList<>();
 		String sql = "SELECT * FROM TRAVEL_BOARD WHERE DEL_YN = 'N' AND (BOARD_TITLE LIKE ? OR BOARD_CONTENT LIKE ?) AND BOARD_CATEGORY = ? ORDER BY BOARD_IDX DESC";
-				
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + keyword + "%");
 			pstmt.setString(2, "%" + keyword + "%");
 			pstmt.setString(3, category);
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				BoardVO vo = new BoardVO();
 				vo.setBoardIdx(rs.getInt("BOARD_IDX"));
 				vo.setBoardTitle(rs.getString("BOARD_TITLE"));
@@ -294,26 +296,45 @@ public class BoardDAO {
 				vo.setDelYn(rs.getString("DEL_YN"));
 				list.add(vo);
 			}
-		} 
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} 
-		finally {
+		} finally {
 			closeCon();
 		}
 		return list;
 	}
-	
+
+	// 좋아요, 작성자 확인
+	public String boardLikeInstIdCheck(int boardIdx) {
+		String sql = "SELECT INST_USER FROM TRAVEL_BOARD WHERE BOARD_IDX = ? AND DEL_YN = 'N'";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardIdx);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				return rs.getString("INST_USER");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+//				closeCon();
+		}
+		
+		return null;
+	}
+
 	// BoardLikeAction
 	public int boardLikeCount(int boardIdx) {
 		int result = 0;
 		String sql = "UPDATE TRAVEL_BOARD SET LIKE_COUNT = LIKE_COUNT + 1 WHERE BOARD_IDX = ?";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardIdx);
 			result = pstmt.executeUpdate();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			closeCon();
