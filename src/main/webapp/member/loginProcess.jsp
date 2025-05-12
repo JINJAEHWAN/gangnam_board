@@ -23,7 +23,7 @@
 		movePage = "/list.co";
 	}
 	
-	response.sendRedirect(movePage);
+	response.sendRedirect(movePage);// 로그
 %>
 
 
