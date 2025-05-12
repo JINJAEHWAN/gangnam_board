@@ -55,7 +55,9 @@ public class Member extends HttpServlet {
 		ActionForward forward = null;
 		
 		if(command.equals("/login.me")) {
-			action = new BoardListAction();
+			forward = new ActionForward();
+			forward.setPath("login.jsp");
+			forward.setRedirect(false);
 		}
 	}
 
