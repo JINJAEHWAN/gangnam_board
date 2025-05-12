@@ -52,6 +52,7 @@ public class BoardController extends HttpServlet {
 		
 		
 		//나중에 페이지 이동 조건문 작성 필요
+		
 		if(command.equals("/deleteAction.co")) {
 			action = new BoardDeleteAction();
 		}
