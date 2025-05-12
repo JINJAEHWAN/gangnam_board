@@ -9,6 +9,8 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 
+import Board.BoardVO;
+
 public class BoardDAO {
 	
 	private Connection conn;
@@ -57,4 +59,54 @@ public class BoardDAO {
 		return result;
 	}
 
+	
+	public BoardVO boardDetail(int boardIdx) {
+		BoardVO vo = null;
+		String sql = "SELECT * FROM TRAVEL_BOARD WHERE BOARD_IDX = ? AND DEL_YN = 'N'";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardIdx);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new BoardVO();
+				vo.setBoardIdx(rs.getInt("BOARD_IDX"));
+				vo.setBoardTitle(rs.getString("BOARD_TITLE"));
+				vo.setBoardContent(rs.getString("BOARD_CONTENT"));
+				vo.setBoardCategory(rs.getString("BOARD_CATEGORY"));
+				vo.setTravelLocation(rs.getString("TRAVEL_LOCATION"));
+				vo.setTravelPeriod(rs.getString("TRAVEL_PERIOD"));
+				vo.setTravelBudget(rs.getInt("TRAVEL_BUDGET"));
+				vo.setViewCount(rs.getInt("VIEW_COUNT"));
+				vo.setLikeCount(rs.getInt("LIKE_COUNT"));
+				vo.setInstUser(rs.getString("INST_USER"));
+				vo.setInstDate(rs.getString("INST_DATE"));
+				vo.setUpdtUser(rs.getString("UPDT_USER"));
+				vo.setUpdtDate(rs.getString("UPDT_DATE"));
+				vo.setDelYn(rs.getString("DEL_YN"));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			//closeCon();
+		}
+		return vo;
+	}
+	
+	public int boardDelete(int boardIdx) {
+		int result = 0;
+		String sql = "UPDATE TRAVEL_BOARD SET DEL_YN = 'Y' WHERE BOARD_IDX = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardIdx);
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeCon();
+		}
+		return result;
+	}
 }
