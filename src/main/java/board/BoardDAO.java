@@ -1,4 +1,4 @@
-package Board;
+package board;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,7 +31,37 @@ public class BoardDAO {
 	
 	public List<BoardVO> boardList() {
 		List<BoardVO> list = new ArrayList<>();
+		String sql = "SELECT * FROM TRAVEL_BOARD WHERE DEL_YN = 'N' ORDER BY BOARD_IDX DESC";
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardVO vo = new BoardVO();
+				vo.setBoardIdx(rs.getInt("BOARD_IDX"));
+				vo.setBoardTitle(rs.getString("BOARD_TITLE"));
+				vo.setBoardContent(rs.getString("BOARD_CONTENT"));
+				vo.setBoardCategory(rs.getString("BOARD_CATEGORY"));
+				vo.setTravelLocation(rs.getString("TRAVEL_LOCATION"));
+				vo.setTravelPeriod(rs.getString("TRAVEL_PERIOD"));
+				vo.setTravelBudget(rs.getInt("TRAVEL_BUDGET"));
+				vo.setViewCount(rs.getInt("VIEW_COUNT"));
+				vo.setLikeCount(rs.getInt("LIKE_COUNT"));
+				vo.setInstUser(rs.getString("INST_USER"));
+				vo.setInstDate(rs.getString("INST_DATE"));
+				vo.setUpdtUser(rs.getString("UPDT_USER"));
+				vo.setUpdtDate(rs.getString("UPDT_DATE"));
+				vo.setDelYn(rs.getString("DEL_YN"));
+				list.add(vo);
+			}		
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			closeCon();
+		}
 		return list;
 	}
 	
