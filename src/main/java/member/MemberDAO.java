@@ -43,7 +43,30 @@ public class MemberDAO {
 		}
 	}
 
-	
+	public int register(MemberVO memVO) {
+		
+		try {
+			String input = "INSERT INTO member (user_id, nickname, password) VALUES (?,?,?)";
+			pstmt = conn.prepareStatement(input);
+			pstmt.setString(1, memVO.getUserId());
+			pstmt.setString(2, memVO.getNickname());
+			pstmt.setString(3, memVO.getPassword());
+
+			int result = pstmt.executeUpdate();
+
+			if (result > 0) {
+				// 회원가입 성공
+				return 1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			conClose();
+		}
+		
+		return 0;
+	}
 	
 	public MemberVO login(String name) {
 		
