@@ -307,6 +307,7 @@
 <body>
 <%
     BoardVO boardVO = (BoardVO) request.getAttribute("boardVO");
+	String sUserId = (String) session.getAttribute("userId");
 %>
     <div class="content">
         <span class="mainTitle">여행 이야기 상세</span>
@@ -382,7 +383,12 @@
                 </svg>
                 조회수 <%=boardVO.getViewCount()%>
             </div>
-            <a href="like.co?board_idx=<%=boardVO.getBoardIdx()%>" class="likeBtn">
+            <!-- 버튼 두 가지로 나눠서(if문) 본인이 작성한 글은 좋아요 버튼 못 누름 -->
+            <% if(sUserId.equals(boardVO.getInstUser())) {%>
+            	<a href="#" class="likeBtn">
+            <% } else { %>
+            	<a href="like.co?board_idx=<%=boardVO.getBoardIdx()%>" class="likeBtn">
+           	<% } %>
                 <svg class="metaIcon" viewBox="0 0 24 24">
                     <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                 </svg>

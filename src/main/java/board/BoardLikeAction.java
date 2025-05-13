@@ -29,9 +29,14 @@ public class BoardLikeAction implements Action {
         // 게시글 번호 가져오기
         int boardIdx = Integer.parseInt(request.getParameter("board_idx"));
         
-        // 좋아요 처리
+        
+        // 좋아요 처리(본인을 제외한 사람만)
         BoardDAO dao = new BoardDAO();
+        BoardVO boardVO = new BoardVO();
+        
+        
         int result = dao.boardLikeCount(boardIdx);
+        
         
         // 상세 페이지로 리다이렉트
         ActionForward forward = new ActionForward();
