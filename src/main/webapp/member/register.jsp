@@ -104,7 +104,7 @@
 <body>
     <div class="container">
         <h1>회원가입</h1>
-        <form action="registerProcess.jsp" method="post">
+        <form action="${pageContext.request.contextPath}/RegisterProcess.me" method="post">
             <div class="form-group">
                 <label for="userId">아이디</label>
                 <input type="text" id="userId" name="userId" required>
@@ -124,7 +124,7 @@
             <button type="submit" class="btn">회원가입</button>
         </form>
         <div class="login-link">
-            이미 계정이 있으신가요? <a href="login.jsp">로그인</a>
+            이미 계정이 있으신가요? <a href="${pageContext.request.contextPath}/loginProcess.me">로그인</a>
         </div>
     </div>
 </body>

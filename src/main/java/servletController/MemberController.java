@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import member.RegisterProcessAction;
 import member.loginProcessAction;
 
 
@@ -60,7 +61,7 @@ public class MemberController extends HttpServlet {
 		else if(command.equals("/loginProcess.me")) {
 			action = new loginProcessAction();
 		}
-		else if(command.equals("RegisterProcess.me")) {
+		else if(command.equals("/RegisterProcess.me")) {
 			action = new RegisterProcessAction();
 		}
 		
