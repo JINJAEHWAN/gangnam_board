@@ -245,9 +245,29 @@
             gap: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
+        
+        .likeBtn_none {
+            text-decoration: none;
+            color: #6c757d;
+            transition: var(--transition);
+            background-color: white;
+            border-radius: 20px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            cursor: auto;
+        }
 
         .likeBtn:hover {
             color: #e74c3c;
+            background-color: #fff5f5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .likeBtn_none:hover {
             background-color: #fff5f5;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -385,7 +405,7 @@
             </div>
             <!-- 버튼 두 가지로 나눠서(if문) 본인이 작성한 글은 좋아요 버튼 못 누름 -->
             <% if(sUserId.equals(boardVO.getInstUser())) {%>
-            	<a href="#" class="likeBtn">
+            	<a href="#" class="likeBtn_none">
             <% } else { %>
             	<a href="like.co?board_idx=<%=boardVO.getBoardIdx()%>" class="likeBtn">
            	<% } %>
