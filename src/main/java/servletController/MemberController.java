@@ -60,7 +60,9 @@ public class MemberController extends HttpServlet {
 		else if(command.equals("/loginProcess.me")) {
 			action = new loginProcessAction();
 		}
-		
+		else if(command.equals("RegisterProcess.me")) {
+			action = new RegisterProcessAction();
+		}
 		
 		try {
 			if ( action != null ) {
