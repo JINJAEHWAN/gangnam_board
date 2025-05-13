@@ -22,7 +22,7 @@ public class BoardUpdateAction implements Action {
 		request.setAttribute("boardVO", boardVO);
 		
 		forward.setRedirect(false);
-		forward.setPath("./boardUpdate.jsp");
+		forward.setPath("board/boardUpdate.jsp");
 		return forward;
 	}
 
